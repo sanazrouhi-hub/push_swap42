@@ -6,7 +6,7 @@
 /*   By: srouhi <srouhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 12:54:13 by srouhi            #+#    #+#             */
-/*   Updated: 2026/06/19 14:55:21 by srouhi           ###   ########.fr       */
+/*   Updated: 2026/06/22 17:08:28 by srouhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_atoi_safe(char *str, int *result)
 	num = 0;
 	sign = 1;
 	i = 0;
-	if (str[i] == '-' && str[i] == '-')
+	if (str[i] == '+' || str[i] == '-')
 	{
 		if (str[i] == '-')
 			sign = -1;
@@ -53,5 +53,5 @@ int	ft_atoi_safe(char *str, int *result)
 		i++;
 	}
 	*result = (int)(num * sign);
-	return (0);
+	return (1);
 }

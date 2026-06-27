@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shivakhadka <shivakhadka@student.42.fr>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 13:30:28 by srouhi            #+#    #+#             */
-/*   Updated: 2026/06/25 09:55:29 by shivakhadka      ###   ########.fr       */
+/*   Updated: 2026/06/27 18:56:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 
 typedef struct s_node
 {
-	int value;
-	// int						index;
+	int 		value;
+	int			index;
 	struct s_node *next;
 	struct s_node *prev;
 	int pos;
@@ -36,6 +36,7 @@ typedef struct s_stack
 
 t_node *lst_new(int value);
 t_node *lst_last(t_node *stack);
+int		lst_size(t_stack *stack)
 void lst_add_back(t_node **stack, t_node *new_node);
 int ft_is_number(char *str);
 int ft_atoi_safe(char *str, int *result);
@@ -60,4 +61,9 @@ t_node *find_target(t_stack *stack_a, int value);
 void position_update(t_stack *stack);
 int cost_to_top(t_stack *stack, t_node *node);
 int total_cost(t_stack *stack_a, t_stack *stack_b, t_node *b_node);
+int		lst_size(t_stack *stack);
+void	update_positions(t_stack *stack);
+void	sort_three(t_stack **stack_a);
+void	sort_four_five(t_stack **stack_a, t_stack **stack_b);
+
 #endif

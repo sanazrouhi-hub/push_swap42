@@ -4,11 +4,14 @@ CC          = cc
 CFLAGS      = -Wall -Wextra -Werror
 
 SRC_FILES   = main.c \
-              parser.c \
               parse_utils.c \
+              parser.c \
               stack_utils.c \
-              operations.c \
               stack.c
+              operations_push.c \
+			  operations_rotate.c \
+			  operations_swap.c \
+			  operations_reverse_rotate.c \
 
 OBJS        = $(SRC_FILES:.c=.o)
 

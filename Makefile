@@ -8,13 +8,13 @@ SRC_FILES   = main.c \
               parse_utils.c \
               stack_utils.c \
               stack.c \
-			  operations_push.c \
-			  operations_reverse_rotate.c \
-			  operations_rotate.c \
-			  operations_swap.c \
-			  target_find.c \
-			  cost_calculator.c \
-			  execute_cheapest.c
+              operations_push.c \
+              operations_reverse_rotate.c \
+              operations_rotate.c \
+              operations_swap.c \
+              target_find.c \
+              cost_calculator.c \
+              execute_cheapest.c
 
 OBJS        = $(SRC_FILES:.c=.o)
 

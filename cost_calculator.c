@@ -28,7 +28,7 @@ int total_cost(t_stack *stack_a, t_stack *stack_b, t_node *b_node)
     int cost_a;
     int cost_b;
 
-    target = target_find(stack_a, b_node->value);
+    target = find_target(stack_a, b_node->value);
     cost_a = cost_to_top(stack_a, target);
     cost_b = cost_to_top(stack_b, b_node);
     if (cost_a > 0 && cost_b > 0)

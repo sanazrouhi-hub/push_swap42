@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shivakhadka <shivakhadka@student.42.fr>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 13:30:28 by srouhi            #+#    #+#             */
-/*   Updated: 2026/06/29 13:05:46 by shivakhadka      ###   ########.fr       */
+/*   Updated: 2026/06/29 20:29:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,8 @@ t_node *find_target(t_stack *stack_a, int value);
 void position_update(t_stack *stack);
 int cost_to_top(t_stack *stack, t_node *node);
 int total_cost(t_stack *stack_a, t_stack *stack_b, t_node *b_node);
+int		lst_size(t_stack *stack);
+void	update_positions(t_stack *stack);
+void	sort_three(t_stack **stack_a);
+void	sort_four_five(t_stack **stack_a, t_stack **stack_b);
 #endif

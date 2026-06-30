@@ -14,7 +14,8 @@ SRC_FILES   = main.c \
               operations_swap.c \
               target_find.c \
               cost_calculator.c \
-              execute_cheapest.c
+              execute_cheapest.c \
+              small_sort.c
 
 OBJS        = $(SRC_FILES:.c=.o)
 

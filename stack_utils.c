@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhi <srouhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 14:06:36 by srouhi            #+#    #+#             */
-/*   Updated: 2026/06/22 17:34:44 by srouhi           ###   ########.fr       */
+/*   Updated: 2026/06/29 20:52:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,23 @@ void	lst_add_back(t_node **stack, t_node *new_node)
 	last_node = lst_last(*stack);
 	last_node->next = new_node;
 	new_node->prev = last_node;
+}
+
+int	lst_size(t_stack *stack)
+{
+	int	size;
+	t_node	*current;
+
+	if (!stack)
+		return (0);
+	size = 0;
+	current = stack->top;
+	while (current)
+	{
+		size++;
+		current = current->next;
+	}
+	return (size);
 }
 
 void	free_stack(t_node **stack)

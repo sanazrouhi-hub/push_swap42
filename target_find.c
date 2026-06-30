@@ -8,25 +8,25 @@ t_node *find_target(t_stack *stack_a, int value)
 
     current = stack_a->top;
     target = NULL;
-    best = INT_MIN;
+    best = INT_MAX;
     while (current)
     {
-        if (current->value < value && current->value > best)
+        if (current->value > value && current->value < best)
         {
             best = current->value;
             target = current;
         }
         current = current->next;
     }
-    while (!target)
+    if (target)
+        return (target);
+    current = stack_a->top;
+    target = stack_a->top;
+    while (current)
     {
-        while (current)
-        {
-            current = stack_a->top;
-            if (!target || current->value > target->value)
-                current = target;
-            current = current->next;
-        }
+        if (current->value < target->value)
+            target = current;
+        current = current->next;
     }
     return (target);
 }

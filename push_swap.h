@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: shivakhadka <shivakhadka@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 13:30:28 by srouhi            #+#    #+#             */
-/*   Updated: 2026/06/29 20:29:56 by marvin           ###   ########.fr       */
+/*   Updated: 2026/06/30 13:53:16 by shivakhadka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include <unistd.h>
 
 #include <stdlib.h>
+
+#include <stdio.h>
 
 typedef struct s_node
 {
@@ -60,8 +62,13 @@ t_node *find_target(t_stack *stack_a, int value);
 void position_update(t_stack *stack);
 int cost_to_top(t_stack *stack, t_node *node);
 int total_cost(t_stack *stack_a, t_stack *stack_b, t_node *b_node);
-int		lst_size(t_stack *stack);
-void	update_positions(t_stack *stack);
-void	sort_three(t_stack **stack_a);
-void	sort_four_five(t_stack **stack_a, t_stack **stack_b);
+int lst_size(t_stack *stack);
+void update_positions(t_stack *stack);
+void sort_three(t_stack **stack_a);
+void sort_four_five(t_stack **stack_a, t_stack **stack_b);
+void execute_move(t_stack *a, t_stack *b, t_node *b_node);
+t_node *find_cheapest(t_stack *a, t_stack *b);
+void push_to_b(t_stack *a, t_stack *b);
+void move_min_to_top(t_stack *a);
+void big_sort(t_stack *a, t_stack *b);
 #endif

@@ -35,20 +35,6 @@ void move_min_to_top(t_stack *a)
     }
 }
 
-void print_stack(t_stack *a, char *label)
-{
-    t_node *current;
-
-    printf("%s: ", label);
-    current = a->top;
-    while (current)
-    {
-        printf("[%d] ", current->value);
-        current = current->next;
-    }
-    printf("\n");
-}
-
 void big_sort(t_stack *a, t_stack *b)
 {
     t_node *cheapest;

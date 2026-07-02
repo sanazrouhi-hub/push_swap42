@@ -6,7 +6,7 @@
 /*   By: shivakhadka <shivakhadka@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 13:30:28 by srouhi            #+#    #+#             */
-/*   Updated: 2026/06/30 13:53:16 by shivakhadka      ###   ########.fr       */
+/*   Updated: 2026/07/01 20:10:01 by shivakhadka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void lst_add_back(t_node **stack, t_node *new_node);
 int ft_is_number(char *str);
 int ft_atoi_safe(char *str, int *result);
 int check_duplicate(t_stack *stack, int num);
-int parse_and_fill_stack(t_stack *stack_a, int argc, char **argv);
+int parse_and_fill_stack(t_stack *stack_a, int argc, char **argv, int start);
 void push_to_stack(t_stack *stack, int value);
 int pop_to_stack(t_stack *stack);
 void sa(t_stack *stack_a);

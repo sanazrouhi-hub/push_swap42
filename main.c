@@ -1,140 +1,104 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: shivakhadka <shivakhadka@student.42.fr>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/22 17:15:57 by srouhi            #+#    #+#             */
-/*   Updated: 2026/06/30 13:33:34 by shivakhadka      ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "push_swap.h"
 #include <stdio.h>
-#include <unistd.h>
 
-void free_stack(t_node **stack);
+static int ft_strcmp(char *s1, char *s2)
+{
+	while (*s1 && *s2 && *s1 == *s2)
+	{
+		s1++;
+		s2++;
+	}
+	return (*s1 - *s2);
+}
 
-static void print_stack(t_stack *stack, char *stack_name)
+static void print_stack(t_stack *stack, char *name)
 {
 	t_node *current;
 
-	if (!stack || !stack->top)
+	current = stack->top;
+	printf("%s: ", name);
+	if (!current)
 	{
-		printf("Stack %s is EMPTY\n", stack_name);
+		printf("EMPTY\n");
 		return;
 	}
-	printf("Stack %s: ", stack_name);
-	current = stack->top;
 	while (current)
 	{
-		printf("[%d] ", current->value);
+		printf("%d ", current->value);
 		current = current->next;
 	}
 	printf("\n");
+}
+
+static void run_sort(t_stack *a, t_stack *b, char *flag)
+{
+	int size;
+
+	size = lst_size(a);
+	if (size <= 1)
+		return;
+	if (size == 2)
+	{
+		sa(a);
+		return;
+	}
+	if (size == 3)
+	{
+		sort_three(&a);
+		return;
+	}
+	if (size <= 5)
+	{
+		sort_four_five(&a, &b);
+		return;
+	}
+	if (ft_strcmp(flag, "-simple") == 0)
+		big_sort(a, b);
+	else if (ft_strcmp(flag, "-medium") == 0)
+		big_sort(a, b);
+	else if (ft_strcmp(flag, "-complex") == 0)
+		big_sort(a, b);
+	else if (ft_strcmp(flag, "-adaptive") == 0)
+		big_sort(a, b);
+	else
+		big_sort(a, b);
 }
 
 int main(int argc, char **argv)
 {
 	t_stack stack_a;
 	t_stack stack_b;
-	t_stack *ptr_a;
-	t_stack *ptr_b;
-	int size;
+	char *flag;
+	int start;
 
 	if (argc < 2)
 		return (0);
-
 	stack_a.top = NULL;
 	stack_a.size = 0;
 	stack_b.top = NULL;
 	stack_b.size = 0;
-
-	ptr_a = &stack_a;
-	ptr_b = &stack_b;
-
-	if (!parse_and_fill_stack(&stack_a, argc, argv))
+	flag = "-simple";
+	start = 1;
+	if (argv[1][0] == '-')
+	{
+		flag = argv[1];
+		start = 2;
+	}
+	if (!parse_and_fill_stack(&stack_a, argc, argv, start))
 	{
 		write(2, "Error\n", 6);
 		return (1);
 	}
-	printf("--- BEFORE SORTING ---\n");
+	printf("--- BEFORE ---\n");
 	print_stack(&stack_a, "A");
 	print_stack(&stack_b, "B");
-	printf("----------------------\n\n");
-
-	size = lst_size(&stack_a);
-	if (size == 2)
-		sa(&stack_a);
-	else if (size == 3)
-		sort_three(&ptr_a);
-	else if (size == 4 || size == 5)
-		sort_four_five(&ptr_a, &ptr_b);
-	else if (size > 5)
-		big_sort(&stack_a, &stack_b);
-	printf("\n--- AFTER SORTING ---\n");
+	printf("--------------\n");
+	run_sort(&stack_a, &stack_b, flag);
+	printf("\n--- AFTER ---\n");
 	print_stack(&stack_a, "A");
 	print_stack(&stack_b, "B");
-	printf("---------------------\n");
-	/* پاک‌سازی حافظه نودها */
-	if (stack_a.top)
-		free_stack(&(stack_a.top));
-	if (stack_b.top)
-		free_stack(&(stack_b.top));
+	printf("-------------\n");
+	// free_stack(&(stack_a.top));
+	// free_stack(&(stack_b.top));
 	return (0);
 }
-
-/*
-#include "push_swap.h"
-#include <stdio.h>
-
-void	print_stacks_test(t_stack *a, t_stack *b)
-{
-	t_node	*curr;
-
-	printf("--- Stack A ---\n");
-	curr = a->top;
-	while (curr)
-	{
-		printf("%d\n", curr->value);
-		curr = curr->next;
-	}
-	printf("--- Stack B ---\n");
-	curr = b->top;
-	while (curr)
-	{
-		printf("%d\n", curr->value);
-		curr = curr->next;
-	}
-	printf("===============\n");
-}
-
-int	main(int argc, char **argv)
-{
-	t_stack	stack_a;
-	t_stack	stack_b;
-
-	if (argc < 2)
-	return (0);
-	stack_a.top = NULL;
-	stack_a.size = 0;
-	stack_b.top = NULL;
-	stack_b.size = 0;
-	if (!parse_and_fill_stack(&stack_a, argc, argv))
-	{
-		write(2, "Error\n", 6);
-		return (1);
-	}
-	printf("Initial state:\n");
-	print_stacks_test(&stack_a, &stack_b);
-
-	//test for operations
-	printf("\nExecuting pb and sa:\n");
-	pb(&stack_a, &stack_b);
-	sa(&stack_a);
-	print_stacks_test(&stack_a, &stack_b);
-
-	return (0);
-}
-*/

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhi <srouhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: shivakhadka <shivakhadka@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 14:06:00 by srouhi            #+#    #+#             */
-/*   Updated: 2026/06/22 17:44:34 by srouhi           ###   ########.fr       */
+/*   Updated: 2026/07/01 20:09:28 by shivakhadka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	check_duplicate(t_stack *stack, int num)
+int check_duplicate(t_stack *stack, int num)
 {
-	t_node	*current;
+	t_node *current;
 
 	current = stack->top;
 	while (current)
@@ -23,17 +23,16 @@ int	check_duplicate(t_stack *stack, int num)
 			return (1);
 		current = current->next;
 	}
-	return (0); 
+	return (0);
 }
 
-
-int	parse_and_fill_stack(t_stack *stack_a, int argc, char **argv)
+int parse_and_fill_stack(t_stack *stack_a, int argc, char **argv, int start)
 {
-	int			i;
-	int			value;
-	t_node		*new_node;
+	int i;
+	int value;
+	t_node *new_node;
 
-	i = 1;
+	i = start;
 	while (i < argc)
 	{
 		if (!ft_is_number(argv[i]))

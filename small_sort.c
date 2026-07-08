@@ -78,8 +78,7 @@ void	sort_three(t_stack **stack_a)
 void	sort_four_five(t_stack **stack_a, t_stack **stack_b)
 {
 	int		min_val;
-	int		size;
-	t_node	*tmp;
+	t_node	*curr;
 
 	if (!stack_a || !*stack_a || !stack_b || !*stack_b)
 		return ;
@@ -87,11 +86,12 @@ void	sort_four_five(t_stack **stack_a, t_stack **stack_b)
 	{
 		update_positions(*stack_a);
 		min_val = find_min_value(*stack_a);
-		size = lst_size(*stack_a);
+		curr = (*stack_a)->top;
+		while (curr && curr->value != min_val)
+			curr = curr->next;
 		while ((*stack_a)->top->value != min_val)
 		{
-			tmp = (*stack_a)->top;
-			if (tmp->pos <= size / 2)
+			if (curr && curr->pos <= lst_size(*stack_a) / 2)
 				ra(*stack_a);
 			else
 				rra(*stack_a);

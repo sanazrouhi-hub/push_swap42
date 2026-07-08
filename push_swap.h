@@ -6,7 +6,7 @@
 /*   By: srouhi <srouhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 13:30:28 by srouhi            #+#    #+#             */
-/*   Updated: 2026/07/08 13:11:45 by srouhi           ###   ########.fr       */
+/*   Updated: 2026/07/08 15:41:31 by srouhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_stack
 
 t_node				*lst_new(int value);
 t_node				*lst_last(t_node *stack);
+void				free_stack(t_stack *stack);
 void				lst_add_back(t_node **stack, t_node *new_node);
 int					ft_is_number(char *str);
 int					ft_atoi_safe(char *str, int *result);
@@ -73,6 +74,6 @@ void				big_sort(t_stack *a, t_stack *b);
 void				chunk_sort(t_stack *a, t_stack *b);
 char				**ft_split(char const *s, char c);
 char				*ft_strchr(const char *s, int c);
-void	radix_sort(t_stack *stack_a, t_stack *stack_b);
+void				radix_sort(t_stack *stack_a, t_stack *stack_b);
 
 #endif

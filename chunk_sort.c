@@ -6,7 +6,7 @@
 /*   By: srouhi <srouhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 14:01:46 by srouhi            #+#    #+#             */
-/*   Updated: 2026/07/03 15:37:58 by srouhi           ###   ########.fr       */
+/*   Updated: 2026/07/08 15:30:50 by srouhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	get_chunk_index(t_stack *stack, int value)
 	index = 0;
 	while (current)
 	{
-		compare = stack-> top;
+		compare = stack->top;
 		while (compare)
 		{
 			if (current->value > compare->value)
@@ -41,54 +41,43 @@ static void	move_max_to_top(t_stack *b)
 {
 	t_node	*curr;
 	t_node	*max_node;
-	int		max_pos;
-	int		pos;
 
+	if (!b || !b->top)
+		return ;
+	position_update(b);
 	curr = b->top;
 	max_node = b->top;
-	pos = 0;
-	max_pos = 0;
 	while (curr)
 	{
-		if (curr->value > max_node->value && (max_pos == pos))
+		if (curr->value > max_node->value)
 			max_node = curr;
-		pos++;
 		curr = curr->next;
 	}
 	while (b->top != max_node)
 	{
-		if (max_pos <= b->size / 2)
+		if (max_node->pos <= b->size / 2)
 			rb(b);
 		else
 			rrb(b);
 	}
 }
 
-static int	init_chunk(t_stack *a)
-{
-	int	chunk_size;
-
-	chunk_size = 1;
-	while ((chunk_size * chunk_size) <= a->size)
-		chunk_size++;
-	return (chunk_size * 1.5);
-}
-
 void	chunk_sort(t_stack *a, t_stack *b)
 {
-	int	i;
 	int	chunk_size;
+	int	i;
 
-	chunk_size = init_chunk(a);
+	if (lst_size(a) <= 100)
+		chunk_size = 15;
+	else
+		chunk_size = 30;
 	i = 0;
 	while (a->top)
 	{
-		if (get_chunk_index(a, a->top->value) <= i && ++i)
-			pb(a, b);
-		else if (get_chunk_index(a, a->top->value) <= i + chunk_size && ++i)
+		if (get_chunk_index(a, a->top->value) <= i)
 		{
 			pb(a, b);
-			rb(b);
+			i++;
 		}
 		else
 			ra(a);

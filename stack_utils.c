@@ -6,7 +6,7 @@
 /*   By: srouhi <srouhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 14:06:36 by srouhi            #+#    #+#             */
-/*   Updated: 2026/07/03 15:12:22 by srouhi           ###   ########.fr       */
+/*   Updated: 2026/07/08 15:40:01 by srouhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,19 +68,20 @@ int	lst_size(t_stack *stack)
 	return (size);
 }
 
-void	free_stack(t_node **stack)
+void	free_stack(t_stack *stack)
 {
 	t_node	*current;
-	t_node	*temp;
+	t_node	*next_node;
 
-	if (!stack || !*stack)
+	if (!stack || !stack->top)
 		return ;
-	current = *stack;
+	current = stack->top;
 	while (current)
 	{
-		temp = current->next;
+		next_node = current->next;
 		free(current);
-		current = temp;
+		current = next_node;
 	}
-	*stack = NULL;
+	stack->top = NULL;
+	stack->size = 0;
 }

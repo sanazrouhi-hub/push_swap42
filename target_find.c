@@ -6,7 +6,7 @@
 /*   By: srouhi <srouhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 15:43:47 by srouhi            #+#    #+#             */
-/*   Updated: 2026/07/08 13:06:36 by srouhi           ###   ########.fr       */
+/*   Updated: 2026/07/08 14:48:30 by srouhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ t_node	*find_target(t_stack *stack_a, int value)
 		current = current->next;
 	}
 	if (target)
-	
 		return (target);
 	current = stack_a->top;
 	target = stack_a->top;

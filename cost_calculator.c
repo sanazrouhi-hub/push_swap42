@@ -6,7 +6,7 @@
 /*   By: srouhi <srouhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 15:35:39 by srouhi            #+#    #+#             */
-/*   Updated: 2026/07/03 15:35:46 by srouhi           ###   ########.fr       */
+/*   Updated: 2026/07/08 15:29:54 by srouhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,9 @@ void	position_update(t_stack *stack)
 
 int	cost_to_top(t_stack *stack, t_node *node)
 {
-	if (node->pos <= stack->size / 2) // this is for ra and rb which is forward
+	if (node->pos <= stack->size / 2)
 		return (node->pos);
 	return (-(stack->size - node->pos));
-	// this is for rra and rrb which is backward
 }
 
 int	total_cost(t_stack *stack_a, t_stack *stack_b, t_node *b_node)

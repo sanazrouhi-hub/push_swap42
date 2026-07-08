@@ -26,23 +26,16 @@ OBJS        = $(SRC_FILES:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@echo "Compiling $(NAME)..."
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-	@echo "$(NAME) compiled successfully!"
-
 
 %.o: %.c push_swap.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@echo "Cleaning object files..."
 	@rm -f $(OBJS)
-	@echo "Object files cleaned."
 
 fclean: clean
-	@echo "Removing $(NAME)..."
 	@rm -f $(NAME)
-	@echo "$(NAME) removed."
 
 
 re: fclean all

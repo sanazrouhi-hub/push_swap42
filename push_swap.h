@@ -6,7 +6,7 @@
 /*   By: shivakhadka <shivakhadka@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 13:30:28 by srouhi            #+#    #+#             */
-/*   Updated: 2026/07/01 20:10:01 by shivakhadka      ###   ########.fr       */
+/*   Updated: 2026/07/08 10:32:10 by shivakhadka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 typedef struct s_node
 {
 	int value;
-	// int						index;
+	int index;
 	struct s_node *next;
 	struct s_node *prev;
 	int pos;
@@ -43,8 +43,8 @@ int ft_is_number(char *str);
 int ft_atoi_safe(char *str, int *result);
 int check_duplicate(t_stack *stack, int num);
 int parse_and_fill_stack(t_stack *stack_a, int argc, char **argv, int start);
-void push_to_stack(t_stack *stack, int value);
-int pop_to_stack(t_stack *stack);
+void push_to_stack(t_stack *stack, t_node *node);
+t_node *pop_to_stack(t_stack *stack);
 void sa(t_stack *stack_a);
 void sb(t_stack *stack_b);
 void ss(t_stack *stack_a, t_stack *stack_b);
@@ -71,4 +71,6 @@ t_node *find_cheapest(t_stack *a, t_stack *b);
 void push_to_b(t_stack *a, t_stack *b);
 void move_min_to_top(t_stack *a);
 void big_sort(t_stack *a, t_stack *b);
+void radix_sort(t_stack *a, t_stack *b);
+
 #endif

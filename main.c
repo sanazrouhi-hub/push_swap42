@@ -57,7 +57,7 @@ static void run_sort(t_stack *a, t_stack *b, char *flag)
 	else if (ft_strcmp(flag, "-medium") == 0)
 		big_sort(a, b);
 	else if (ft_strcmp(flag, "-complex") == 0)
-		big_sort(a, b);
+		radix_sort(a, b);
 	else if (ft_strcmp(flag, "-adaptive") == 0)
 		big_sort(a, b);
 	else

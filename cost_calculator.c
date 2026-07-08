@@ -45,5 +45,9 @@ int total_cost(t_stack *stack_a, t_stack *stack_b, t_node *b_node)
         else
             return (cost_b);
     }
-    return (abs(cost_a) + abs(cost_b));
+    if (cost_a < 0)
+        cost_a = -cost_a;
+    if (cost_b < 0)
+        cost_b = -cost_b;
+    return (cost_a + cost_b);
 }

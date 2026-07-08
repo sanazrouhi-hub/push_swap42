@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   stack_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shivakhadka <shivakhadka@student.42.fr>    +#+  +:+       +#+        */
+/*   By: srouhi <srouhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 14:06:36 by srouhi            #+#    #+#             */
-/*   Updated: 2026/07/08 10:01:56 by shivakhadka      ###   ########.fr       */
+/*   Updated: 2026/07/03 15:12:22 by srouhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_node *lst_new(int value)
+t_node	*lst_new(int value)
 {
-	t_node *new_node;
+	t_node		*new_node;
 
 	new_node = (t_node *)malloc(sizeof(t_node));
 	if (!new_node)
@@ -26,7 +26,7 @@ t_node *lst_new(int value)
 	return (new_node);
 }
 
-t_node *lst_last(t_node *stack)
+t_node	*lst_last(t_node *stack)
 {
 	if (!stack)
 		return (NULL);
@@ -35,26 +35,26 @@ t_node *lst_last(t_node *stack)
 	return (stack);
 }
 
-void lst_add_back(t_node **stack, t_node *new_node)
+void	lst_add_back(t_node **stack, t_node *new_node)
 {
-	t_node *last_node;
+	t_node	*last_node;
 
 	if (!stack || !new_node)
-		return;
+		return ;
 	if (*stack == NULL)
 	{
 		*stack = new_node;
-		return;
+		return ;
 	}
 	last_node = lst_last(*stack);
 	last_node->next = new_node;
 	new_node->prev = last_node;
 }
 
-int lst_size(t_stack *stack)
+int	lst_size(t_stack *stack)
 {
-	int size;
-	t_node *current;
+	int		size;
+	t_node	*current;
 
 	if (!stack)
 		return (0);
@@ -68,13 +68,13 @@ int lst_size(t_stack *stack)
 	return (size);
 }
 
-void free_stack(t_node **stack)
+void	free_stack(t_node **stack)
 {
-	t_node *current;
-	t_node *temp;
+	t_node	*current;
+	t_node	*temp;
 
 	if (!stack || !*stack)
-		return;
+		return ;
 	current = *stack;
 	while (current)
 	{

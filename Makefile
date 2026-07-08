@@ -5,6 +5,7 @@ CFLAGS      = -Wall -Wextra -Werror
 
 SRC_FILES   = main.c \
               parser.c \
+			  ft_split.c \
               parse_utils.c \
               stack_utils.c \
               stack.c \
@@ -17,7 +18,8 @@ SRC_FILES   = main.c \
               execute_cheapest.c \
               big_sort.c \
               small_sort.c \
-              radix_sort.c
+			  chunk_sort.c \
+			  radix_sort.c
 
 OBJS        = $(SRC_FILES:.c=.o)
 

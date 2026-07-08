@@ -1,12 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   small_sort.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: srouhi <srouhi@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2026/07/03 15:38:23 by srouhi            #+#    #+#             */
+/*   Updated: 2026/07/03 15:38:23 by srouhi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void update_positions(t_stack *stack)
+void	update_positions(t_stack *stack)
 {
-	int pos;
-	t_node *current;
+	int		pos;
+	t_node	*current;
 
 	if (!stack || !stack->top)
-		return;
+		return ;
 	pos = 0;
 	current = stack->top;
 	while (current)
@@ -17,10 +32,10 @@ void update_positions(t_stack *stack)
 	}
 }
 
-static int find_min_value(t_stack *stack)
+static int	find_min_value(t_stack *stack)
 {
-	int min_val;
-	t_node *current;
+	int		min_val;
+	t_node	*current;
 
 	if (!stack || !stack->top)
 		return (INT_MAX);
@@ -35,45 +50,39 @@ static int find_min_value(t_stack *stack)
 	return (min_val);
 }
 
-void sort_three(t_stack **stack_a)
+void	sort_three(t_stack **stack_a)
 {
-	int first;
-	int second;
-	int third;
+	int	first;
+	int	second;
+	int	third;
 
-	if (!stack_a || !*stack_a || !(*stack_a)->top || !(*stack_a)->top->next)
-		return;
-	if (!(*stack_a)->top->next->next)
-		return;
+	if (!stack_a || !*stack_a || !(*stack_a)->top || !(*stack_a)->top->next
+		|| !(*stack_a)->top->next->next)
+		return ;
 	first = (*stack_a)->top->value;
 	second = (*stack_a)->top->next->value;
 	third = (*stack_a)->top->next->next->value;
 	if (first > second && second < third && first < third)
 		sa(*stack_a);
-	else if (first > second && second > third)
-	{
-		sa(*stack_a);
+	else if (first > second && second > third && (sa(*stack_a), 1))
 		rra(*stack_a);
-	}
 	else if (first > second && second < third && first > third)
 		ra(*stack_a);
-	else if (first < second && second > third && first < third)
-	{
-		sa(*stack_a);
+	else if (first < second && second > third && first < third && (sa(*stack_a),
+			1))
 		ra(*stack_a);
-	}
 	else if (first < second && second > third && first > third)
 		rra(*stack_a);
 }
 
-void sort_four_five(t_stack **stack_a, t_stack **stack_b)
+void	sort_four_five(t_stack **stack_a, t_stack **stack_b)
 {
-	int min_val;
-	int size;
-	t_node *tmp;
+	int		min_val;
+	int		size;
+	t_node	*tmp;
 
 	if (!stack_a || !*stack_a || !stack_b || !*stack_b)
-		return;
+		return ;
 	while (lst_size(*stack_a) > 3)
 	{
 		update_positions(*stack_a);

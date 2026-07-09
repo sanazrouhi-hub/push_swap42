@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhi <srouhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: shivakhadka <shivakhadka@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 15:42:01 by srouhi            #+#    #+#             */
-/*   Updated: 2026/07/08 15:48:27 by srouhi           ###   ########.fr       */
+/*   Updated: 2026/07/09 13:33:33 by shivakhadka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,19 @@
 
 #include "push_swap.h"
 
-static void	run_sort(t_stack *a, t_stack *b)
+static void run_sort(t_stack *a, t_stack *b)
 {
-	int	size;
+	int size;
 
 	size = lst_size(a);
 	if (size <= 1)
-		return ;
+		return;
 	if (size == 2)
-		sa(a);
+	{
+		if (a->top->value > a->top->next->value)
+			sa(a);
+		return;
+	}
 	else if (size == 3)
 		sort_three(&a);
 	else if (size <= 5)
@@ -32,10 +36,10 @@ static void	run_sort(t_stack *a, t_stack *b)
 		chunk_sort(a, b);
 }
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	t_stack	stack_a;
-	t_stack	stack_b;
+	t_stack stack_a;
+	t_stack stack_b;
 
 	if (argc < 2)
 		return (0);
@@ -45,7 +49,7 @@ int	main(int argc, char **argv)
 	{
 		write(2, "Error\n", 6);
 		free_stack(&stack_a);
-		return (1); 
+		return (1);
 	}
 	run_sort(&stack_a, &stack_b);
 	free_stack(&stack_a);

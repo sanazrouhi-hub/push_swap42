@@ -46,7 +46,11 @@ void adaptive(t_stack *a, t_stack *b)
     if (size <= 5)
     {
         if (size == 2)
-            sa(a);
+        {
+            if (a->top->value > a->top->next->value)
+                sa(a);
+            return;
+        }
         else if (size == 3)
             sort_three(&a);
         else
@@ -54,9 +58,9 @@ void adaptive(t_stack *a, t_stack *b)
         return;
     }
     if (disorder < 2.0)
-        big_sort(&a, &b);
+        big_sort(a, b);
     else if (disorder < 5.0)
-        chunk_sort(&a, &b);
+        chunk_sort(a, b);
     else
-        radix_sort(&a, &b);
+        radix_sort(a, b);
 }

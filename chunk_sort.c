@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   chunk_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhi <srouhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: shivakhadka <shivakhadka@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 14:01:46 by srouhi            #+#    #+#             */
-/*   Updated: 2026/07/08 15:30:50 by srouhi           ###   ########.fr       */
+/*   Updated: 2026/07/09 13:25:23 by shivakhadka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	get_chunk_index(t_stack *stack, int value)
+static int get_chunk_index(t_stack *stack, int value)
 {
-	t_node	*current;
-	t_node	*compare;
-	int		index;
+	t_node *current;
+	t_node *compare;
+	int index;
 
 	current = stack->top;
 	index = 0;
@@ -37,13 +37,13 @@ static int	get_chunk_index(t_stack *stack, int value)
 	return (0);
 }
 
-static void	move_max_to_top(t_stack *b)
+static void move_max_to_top(t_stack *b)
 {
-	t_node	*curr;
-	t_node	*max_node;
+	t_node *curr;
+	t_node *max_node;
 
 	if (!b || !b->top)
-		return ;
+		return;
 	position_update(b);
 	curr = b->top;
 	max_node = b->top;
@@ -62,15 +62,16 @@ static void	move_max_to_top(t_stack *b)
 	}
 }
 
-void	chunk_sort(t_stack *a, t_stack *b)
+void chunk_sort(t_stack *a, t_stack *b)
 {
-	int	chunk_size;
-	int	i;
+	int chunk_size;
+	int i;
 
 	if (lst_size(a) <= 100)
 		chunk_size = 15;
 	else
 		chunk_size = 30;
+	(void)chunk_size;
 	i = 0;
 	while (a->top)
 	{

@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   target_find.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhi <srouhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: shkhadka <shkhadka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 15:43:47 by srouhi            #+#    #+#             */
-/*   Updated: 2026/07/08 14:48:30 by srouhi           ###   ########.fr       */
+/*   Updated: 2026/07/09 16:34:11 by shkhadka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static t_node	*find_min_node(t_stack *stack_a)
+{
+	t_node	*current;
+	t_node	*min_node;
+
+	current = stack_a->top;
+	min_node = stack_a->top;
+	while (current)
+	{
+		if (current->value < min_node->value)
+			min_node = current;
+		current = current->next;
+	}
+	return (min_node);
+}
 
 t_node	*find_target(t_stack *stack_a, int value)
 {
@@ -32,13 +48,5 @@ t_node	*find_target(t_stack *stack_a, int value)
 	}
 	if (target)
 		return (target);
-	current = stack_a->top;
-	target = stack_a->top;
-	while (current)
-	{
-		if (current->value < target->value)
-			target = current;
-		current = current->next;
-	}
-	return (target);
+	return (find_min_node(stack_a));
 }

@@ -6,7 +6,7 @@
 /*   By: shkhadka <shkhadka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 15:35:39 by srouhi            #+#    #+#             */
-/*   Updated: 2026/07/09 16:28:34 by shkhadka         ###   ########.fr       */
+/*   Updated: 2026/07/09 16:44:18 by shkhadka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ int	total_cost(t_stack *stack_a, t_stack *stack_b, t_node *b_node)
 
 	target = find_target(stack_a, b_node->value);
 	cost_a = cost_to_top(stack_a, target);
-	cost_b = calc_maching_costs(cost_a, cost_b);
+	cost_b = cost_to_top(stack_b, b_node);
+	return (calc_maching_costs(cost_a, cost_b));
 }

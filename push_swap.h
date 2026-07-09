@@ -6,7 +6,7 @@
 /*   By: shivakhadka <shivakhadka@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 13:30:28 by srouhi            #+#    #+#             */
-/*   Updated: 2026/07/09 13:04:38 by shivakhadka      ###   ########.fr       */
+/*   Updated: 2026/07/09 14:23:28 by shivakhadka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int ft_atoi_safe(char *str, int *result);
 int check_duplicate(t_stack *stack, int num);
 int parse_and_fill_stack(t_stack *stack_a, int argc,
 						 char **argv, int start);
-void push_to_stack(t_stack *stack, int value);
-int pop_to_stack(t_stack *stack);
+void push_to_stack(t_stack *stack, t_node *node);
+t_node *pop_to_stack(t_stack *stack);
 void sa(t_stack *stack_a);
 void sb(t_stack *stack_b);
 void ss(t_stack *stack_a, t_stack *stack_b);

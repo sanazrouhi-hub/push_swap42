@@ -3,33 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   operations_push.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shkhadka <shkhadka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shivakhadka <shivakhadka@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 18:05:53 by shkhadka          #+#    #+#             */
-/*   Updated: 2026/06/22 18:07:39 by shkhadka         ###   ########.fr       */
+/*   Updated: 2026/07/09 14:24:47 by shivakhadka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	pa(t_stack *stack_a, t_stack *stack_b)
+void pa(t_stack *stack_a, t_stack *stack_b)
 {
-	int	value;
+	t_node *node;
 
 	if (!stack_b->top)
-		return ;
-	value = pop_to_stack(stack_b);
-	push_to_stack(stack_a, value);
+		return;
+	node = pop_to_stack(stack_b);
+	push_to_stack(stack_a, node);
 	write(1, "pa\n", 3);
 }
 
-void	pb(t_stack *stack_a, t_stack *stack_b)
+void pb(t_stack *stack_a, t_stack *stack_b)
 {
-	int	value;
+	t_node *node;
 
 	if (!stack_a->top)
-		return ;
-	value = pop_to_stack(stack_a);
-	push_to_stack(stack_b, value);
+		return;
+	node = pop_to_stack(stack_a);
+	push_to_stack(stack_b, node);
 	write(1, "pb\n", 3);
 }

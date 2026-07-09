@@ -70,7 +70,6 @@ void	radix_sort(t_stack *a, t_stack *b)
 
 	normalize(a);
 	max_bits = get_max_bits(a);
-	printf("max_bits=%d\n", max_bits);
 	bit = 0;
 	while (bit < max_bits)
 	{

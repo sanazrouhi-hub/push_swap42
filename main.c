@@ -1,21 +1,35 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: shivakhadka <shivakhadka@student.42.fr>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/03 15:42:01 by srouhi            #+#    #+#             */
-/*   Updated: 2026/07/09 13:33:33 by shivakhadka      ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "push_swap.h"
-#include <stdio.h>
-
 #include "push_swap.h"
 
-static void run_sort(t_stack *a, t_stack *b)
+int ft_strcmp(char *s1, char *s2)
+{
+	while (*s1 && *s2 && *s1 == *s2)
+	{
+		s1++;
+		s2++;
+	}
+	return (*s1 - *s2);
+}
+
+static void print_stack(t_stack *stack, char *name)
+{
+	t_node *current;
+
+	current = stack->top;
+	printf("%s: ", name);
+	if (!current)
+	{
+		printf("EMPTY\n");
+		return;
+	}
+	while (current)
+	{
+		printf("%d ", current->value);
+		current = current->next;
+	}
+	printf("\n");
+}
+
+static void run_sort(t_stack *a, t_stack *b, char *flag)
 {
 	int size;
 
@@ -24,35 +38,66 @@ static void run_sort(t_stack *a, t_stack *b)
 		return;
 	if (size == 2)
 	{
-		if (a->top->value > a->top->next->value)
-			sa(a);
+		sa(a);
 		return;
 	}
-	else if (size == 3)
+	if (size == 3)
+	{
 		sort_three(&a);
-	else if (size <= 5)
+		return;
+	}
+	if (size <= 5)
+	{
 		sort_four_five(&a, &b);
-	else
+		return;
+	}
+	if (ft_strcmp(flag, "-simple") == 0)
+		big_sort(a, b);
+	else if (ft_strcmp(flag, "-medium") == 0)
 		chunk_sort(a, b);
+	else if (ft_strcmp(flag, "-complex") == 0)
+		radix_sort(a, b);
+	else if (ft_strcmp(flag, "-adaptive") == 0)
+		adaptive(a, b);
+	else
+		big_sort(a, b);
 }
 
 int main(int argc, char **argv)
 {
 	t_stack stack_a;
 	t_stack stack_b;
+	char *flag;
+	int start;
 
 	if (argc < 2)
 		return (0);
-	stack_a = (t_stack){NULL, 0};
-	stack_b = (t_stack){NULL, 0};
-	if (!parse_and_fill_stack(&stack_a, argc, argv, 1))
+	stack_a.top = NULL;
+	stack_a.size = 0;
+	stack_b.top = NULL;
+	stack_b.size = 0;
+	flag = "-simple";
+	start = 1;
+	if (argv[1][0] == '-')
+	{
+		flag = argv[1];
+		start = 2;
+	}
+	if (!parse_and_fill_stack(&stack_a, argc, argv, start))
 	{
 		write(2, "Error\n", 6);
-		free_stack(&stack_a);
 		return (1);
 	}
-	run_sort(&stack_a, &stack_b);
-	free_stack(&stack_a);
-	free_stack(&stack_b);
+	printf("--- BEFORE ---\n");
+	print_stack(&stack_a, "A");
+	print_stack(&stack_b, "B");
+	printf("--------------\n");
+	run_sort(&stack_a, &stack_b, flag);
+	printf("\n--- AFTER ---\n");
+	print_stack(&stack_a, "A");
+	print_stack(&stack_b, "B");
+	printf("-------------\n");
+	free_stack(&(stack_a));
+	free_stack(&(stack_b));
 	return (0);
 }

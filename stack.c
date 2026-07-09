@@ -3,44 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhi <srouhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: shivakhadka <shivakhadka@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 13:18:34 by shkhadka          #+#    #+#             */
-/*   Updated: 2026/07/03 15:41:17 by srouhi           ###   ########.fr       */
+/*   Updated: 2026/07/09 14:22:58 by shivakhadka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push_to_stack(t_stack *stack, int value)
+void push_to_stack(t_stack *stack, t_node *node)
 {
-	t_node	*new;
-
-	new = malloc(sizeof(t_node));
-	if (!new)
-		return ;
-	new->value = value;
-	new->next = stack->top;
-	new->prev = NULL;
+	if (!node)
+		return;
+	node->next = stack->top;
+	node->prev = NULL;
 	if (stack->top)
-		stack->top->prev = new;
-	stack->top = new;
+		stack->top->prev = node;
+	stack->top = node;
 	stack->size++;
 }
 
-int	pop_to_stack(t_stack *stack)
+t_node *pop_to_stack(t_stack *stack)
 {
-	t_node		*temp;
-	int			value;
+	t_node *temp;
 
 	if (!stack->top)
-		return (0);
+		return (NULL);
 	temp = stack->top;
-	value = temp->value;
 	stack->top = stack->top->next;
 	if (stack->top)
 		stack->top->prev = NULL;
-	free(temp);
+	temp->next = NULL;
+	temp->prev = NULL;
 	stack->size--;
-	return (value);
+	return (temp);
 }

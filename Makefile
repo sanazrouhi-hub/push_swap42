@@ -19,7 +19,8 @@ SRC_FILES   = main.c \
               big_sort.c \
               small_sort.c \
 			  chunk_sort.c \
-			  radix_sort.c
+			  radix_sort.c \
+              adaptive.c
 
 OBJS        = $(SRC_FILES:.c=.o)
 

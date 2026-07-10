@@ -20,7 +20,8 @@ SRC_FILES   = main.c \
               small_sort.c \
 			  chunk_sort.c \
 			  radix_sort.c \
-              adaptive.c
+              adaptive.c \
+			  strategy.c
 
 OBJS        = $(SRC_FILES:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: srouhi <srouhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 12:54:13 by srouhi            #+#    #+#             */
-/*   Updated: 2026/06/22 17:08:28 by srouhi           ###   ########.fr       */
+/*   Updated: 2026/07/10 16:43:44 by srouhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,21 @@ int	ft_atoi_safe(char *str, int *result)
 		i++;
 	}
 	*result = (int)(num * sign);
+	return (1);
+}
+
+int	is_sorted(t_stack *stack)
+{
+	t_node	*curr;
+
+	if (!stack || !stack->top)
+		return (1);
+	curr = stack->top;
+	while (curr->next)
+	{
+		if (curr->value > curr->next->value)
+			return (0);
+		curr = curr->next;
+	}
 	return (1);
 }

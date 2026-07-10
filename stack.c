@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shivakhadka <shivakhadka@student.42.fr>    +#+  +:+       +#+        */
+/*   By: srouhi <srouhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 13:18:34 by shkhadka          #+#    #+#             */
-/*   Updated: 2026/07/09 14:22:58 by shivakhadka      ###   ########.fr       */
+/*   Updated: 2026/07/10 20:42:22 by srouhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void push_to_stack(t_stack *stack, t_node *node)
+void	push_to_stack(t_stack *stack, t_node *node)
 {
 	if (!node)
-		return;
+		return ;
 	node->next = stack->top;
 	node->prev = NULL;
 	if (stack->top)
@@ -24,9 +24,9 @@ void push_to_stack(t_stack *stack, t_node *node)
 	stack->size++;
 }
 
-t_node *pop_to_stack(t_stack *stack)
+t_node	*pop_to_stack(t_stack *stack)
 {
-	t_node *temp;
+	t_node	*temp;
 
 	if (!stack->top)
 		return (NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shkhadka <shkhadka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: srouhi <srouhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 13:30:28 by srouhi            #+#    #+#             */
-/*   Updated: 2026/07/09 16:43:51 by shkhadka         ###   ########.fr       */
+/*   Updated: 2026/07/10 16:45:27 by srouhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,7 @@ char				**ft_split(char const *s, char c);
 char				*ft_strchr(const char *s, int c);
 void				radix_sort(t_stack *stack_a, t_stack *stack_b);
 void				adaptive(t_stack *a, t_stack *b);
-
+void				run_sort(t_stack *a, t_stack *b, char *flag);
+int					ft_strcmp(const char *s1, const char *s2);
+int					is_sorted(t_stack *stack);
 #endif

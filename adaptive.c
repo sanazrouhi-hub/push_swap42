@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   adaptive.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shkhadka <shkhadka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: srouhi <srouhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 16:16:13 by shkhadka          #+#    #+#             */
-/*   Updated: 2026/07/09 16:17:49 by shkhadka         ###   ########.fr       */
+/*   Updated: 2026/07/10 15:01:43 by srouhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ void	adaptive(t_stack *a, t_stack *b)
 			sort_four_five(&a, &b);
 		return ;
 	}
-	if (disorder < 2.0)
+	if (disorder < 0.2)
 		big_sort(a, b);
-	else if (disorder < 5.0)
+	else if (disorder < 0.5)
 		chunk_sort(a, b);
 	else
 		radix_sort(a, b);

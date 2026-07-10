@@ -3,38 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   chunk_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shkhadka <shkhadka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: srouhi <srouhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 16:16:26 by shkhadka          #+#    #+#             */
-/*   Updated: 2026/07/09 16:18:08 by shkhadka         ###   ########.fr       */
+/*   Updated: 2026/07/10 20:42:03 by srouhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	get_chunk_index(t_stack *stack, int value)
+static void	assign_ranks(t_stack *a)
 {
 	t_node	*current;
 	t_node	*compare;
-	int		index;
+	int		rank;
 
-	current = stack->top;
-	index = 0;
+	current = a->top;
 	while (current)
 	{
-		compare = stack->top;
+		rank = 0;
+		compare = a->top;
 		while (compare)
 		{
-			if (current->value > compare->value)
-				index++;
+			if (compare->value < current->value)
+				rank++;
 			compare = compare->next;
 		}
-		if (current->value == value)
-			return (index);
-		index = 0;
+		current->index = rank;
 		current = current->next;
 	}
-	return (0);
 }
 
 static void	move_max_to_top(t_stack *b)
@@ -49,7 +46,7 @@ static void	move_max_to_top(t_stack *b)
 	max_node = b->top;
 	while (curr)
 	{
-		if (curr->value > max_node->value)
+		if (curr->index > max_node->index)
 			max_node = curr;
 		curr = curr->next;
 	}
@@ -62,23 +59,29 @@ static void	move_max_to_top(t_stack *b)
 	}
 }
 
+static int	get_chunk_size(t_stack *a)
+{
+	if (a->size <= 100)
+		return (20);
+	return (45);
+}
+
 void	chunk_sort(t_stack *a, t_stack *b)
 {
 	int	chunk_size;
-	int	i;
+	int	pushed;
 
-	if (lst_size(a) <= 100)
-		chunk_size = 15;
-	else
-		chunk_size = 30;
-	(void)chunk_size;
-	i = 0;
+	assign_ranks(a);
+	chunk_size = get_chunk_size(a);
+	pushed = 0;
 	while (a->top)
 	{
-		if (get_chunk_index(a, a->top->value) <= i)
+		if (a->top->index < pushed + chunk_size)
 		{
 			pb(a, b);
-			i++;
+			if (b->top->index < pushed + chunk_size / 2)
+				rb(b);
+			pushed++;
 		}
 		else
 			ra(a);

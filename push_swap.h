@@ -3,20 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhi <srouhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: shkhadka <shkhadka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 13:30:28 by srouhi            #+#    #+#             */
-/*   Updated: 2026/07/10 16:45:27 by srouhi           ###   ########.fr       */
+/*   Updated: 2026/07/13 15:42:58 by shkhadka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
+# ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
 # include <limits.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+typedef enum e_op
+{
+	OP_SA,
+	OP_SB,
+	OP_SS,
+	OP_PA,
+	OP_PB,
+	OP_RA,
+	OP_RB,
+	OP_RR,
+	OP_RRA,
+	OP_RRB,
+	OP_RRR
+}					t_op;
+
+typedef struct s_bench
+{
+	int				on;
+	int				count[11];
+	double			disorder;
+	char			*name;
+	char			*complexity;
+}					t_bench;
 
 typedef struct s_node
 {
@@ -31,6 +55,7 @@ typedef struct s_stack
 {
 	t_node			*top;
 	int				size;
+	t_bench			*bench;
 }					t_stack;
 
 t_node				*lst_new(int value);
@@ -79,4 +104,13 @@ void				adaptive(t_stack *a, t_stack *b);
 void				run_sort(t_stack *a, t_stack *b, char *flag);
 int					ft_strcmp(const char *s1, const char *s2);
 int					is_sorted(t_stack *stack);
+void				bench_init(t_bench *bench);
+void				bench_attach(t_bench *bench, t_stack *a, t_stack *b);
+void				bench_add(t_bench *bench, t_op op);
+void				bench_set(t_bench *bench, char *name, char *complexity);
+void				print_bench(t_bench *b);
+double				measure_disorder(t_stack *a);
+void				put_str(char *s);
+void				put_nbr(int n);
+
 #endif

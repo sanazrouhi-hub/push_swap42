@@ -21,6 +21,7 @@ void	pa(t_stack *stack_a, t_stack *stack_b)
 	node = pop_to_stack(stack_b);
 	push_to_stack(stack_a, node);
 	write(1, "pa\n", 3);
+	bench_add(stack_a->bench, OP_PA);
 }
 
 void	pb(t_stack *stack_a, t_stack *stack_b)
@@ -32,4 +33,5 @@ void	pb(t_stack *stack_a, t_stack *stack_b)
 	node = pop_to_stack(stack_a);
 	push_to_stack(stack_b, node);
 	write(1, "pb\n", 3);
+	bench_add(stack_a->bench, OP_PB);
 }

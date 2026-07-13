@@ -111,8 +111,39 @@ ARG=$(seq 1 100 | shuf | tr '\n' ' '); ./push_swap $ARG | ./checker_linux $ARG
 ARG=$(seq 1 500 | shuf | tr '\n' ' '); ./push_swap $ARG | wc -l
 ARG=$(seq 1 500 | shuf | tr '\n' ' '); ./push_swap $ARG | ./checker_linux $ARG
 ```
+## 5. Benchmark Mode Verification
+Beyond raw move counting, the binary embeds a built-in benchmark mode. Passing the --bench flag prints, to stderr only, the measured disorder of the input (before any move is made), the strategy that was selected along with its theoretical complexity class, the total operation count, and a breakdown of every operation type (sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr). Stdout is untouched, so --bench can always be combined with the checker in the same pipeline.
+--bench works with every strategy flag, and the flag order does not matter:
+```bash
+# Bench report with the default adaptive strategy
+ARG=$(seq 1 500 | shuf | tr '\n' ' '); ./push_swap --bench $ARG 1>/dev/null
 
-## 5. Testing & Memory Verification
+# Bench report while a specific strategy is forced
+ARG=$(seq 1 100 | shuf | tr '\n' ' '); ./push_swap --bench --simple $ARG 1>/dev/null
+ARG=$(seq 1 100 | shuf | tr '\n' ' '); ./push_swap --bench --medium $ARG 1>/dev/null
+ARG=$(seq 1 500 | shuf | tr '\n' ' '); ./push_swap --bench --complex $ARG 1>/dev/null
+
+# Flag order does not matter
+./push_swap --medium --bench 5 4 3 2 1 9 8 1>/dev/null
+```
+Confirm that stdout (the operation stream) and stderr (the bench report) stay fully separated, and that the operations printed on stdout still sort correctly with the checker even while --bench is active:
+```bash
+# Save the bench report to a file while piping the sorted moves to the checker
+ARG=$(seq 1 500 | shuf | tr '\n' ' '); ./push_swap --bench --adaptive $ARG 2>bench.log | ./checker_linux $ARG
+cat bench.log
+
+# Confirm the reported total matches the actual number of printed moves
+ARG=$(seq 1 200 | shuf | tr '\n' ' '); ./push_swap --bench --adaptive $ARG 2>/tmp/bench.log 1>/tmp/ops.txt
+grep "Total operations" /tmp/bench.log
+wc -l /tmp/ops.txt
+```
+Edge case: an already-sorted stack still produces a valid bench report (0.00% disorder, 0 total operations) instead of silently skipping it:
+```bash
+./push_swap --bench 1 2 3 4 5
+```
+
+
+## 6. Testing & Memory Verification
 
 To ensure the sorting efficiency and guarantee zero memory leaks (as required by the 42 school standard), we utilized rigorous testing methodology and memory profiling tools.
 

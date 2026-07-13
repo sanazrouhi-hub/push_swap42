@@ -12,40 +12,18 @@
 
 #include "push_swap.h"
 
-static int	count_inversion(t_stack *a)
+static void	adaptive_small(t_stack *a, t_stack *b, int size)
 {
-	t_node	*i;
-	t_node	*j;
-	int		inversion;
-
-	inversion = 0;
-	i = a->top;
-	while (i)
+	bench_set(a->bench, "adaptive (small sort)", "O(1)");
+	if (size == 2)
 	{
-		j = i->next;
-		while (j)
-		{
-			if (i->value > j->value)
-				inversion++;
-			j = j->next;
-		}
-		i = i->next;
+		if (a->top->value > a->top->next->value)
+			sa(a);
 	}
-	return (inversion);
-}
-
-static double	measure_disorder(t_stack *a)
-{
-	int		inversion;
-	int		n;
-	double	total;
-
-	n = a->size;
-	if (n <= 1)
-		return (0.0);
-	inversion = count_inversion(a);
-	total = (double)(n * (n - 1)) / 2.0;
-	return ((double)inversion / total);
+	else if (size == 3)
+		sort_three(&a);
+	else
+		sort_four_five(&a, &b);
 }
 
 void	adaptive(t_stack *a, t_stack *b)
@@ -54,25 +32,25 @@ void	adaptive(t_stack *a, t_stack *b)
 	double	disorder;
 
 	size = a->size;
-	disorder = measure_disorder(a);
 	if (size <= 5)
 	{
-		if (size == 2)
-		{
-			if (a->top->value > a->top->next->value)
-				sa(a);
-			return ;
-		}
-		else if (size == 3)
-			sort_three(&a);
-		else
-			sort_four_five(&a, &b);
+		adaptive_small(a, b, size);
 		return ;
 	}
+	disorder = measure_disorder(a);
 	if (disorder < 0.2)
+	{
+		bench_set(a->bench, "adaptive: greedy insertion", "O(n^2)");
 		big_sort(a, b);
+	}
 	else if (disorder < 0.5)
+	{
+		bench_set(a->bench, "adaptive: chunk sort", "O(n*sqrt(n))");
 		chunk_sort(a, b);
+	}
 	else
+	{
+		bench_set(a->bench, "adaptive: radix sort", "O(n*log(n))");
 		radix_sort(a, b);
+	}
 }

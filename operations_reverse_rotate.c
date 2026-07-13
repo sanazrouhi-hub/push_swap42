@@ -40,6 +40,7 @@ void	rra(t_stack *stack_a)
 		return ;
 	reverse_rotate(stack_a);
 	write(1, "rra\n", 4);
+	bench_add(stack_a->bench, OP_RRA);
 }
 
 void	rrb(t_stack *stack_b)
@@ -48,6 +49,7 @@ void	rrb(t_stack *stack_b)
 		return ;
 	reverse_rotate(stack_b);
 	write(1, "rrb\n", 4);
+	bench_add(stack_b->bench, OP_RRB);
 }
 
 void	rrr(t_stack *stack_a, t_stack *stack_b)
@@ -57,4 +59,5 @@ void	rrr(t_stack *stack_a, t_stack *stack_b)
 	if (stack_b->top && stack_b->top->next)
 		reverse_rotate(stack_b);
 	write(1, "rrr\n", 4);
+	bench_add(stack_a->bench, OP_RRR);
 }

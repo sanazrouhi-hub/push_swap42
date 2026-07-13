@@ -24,6 +24,7 @@ void	sa(t_stack *stack_a)
 	top->value = top->next->value;
 	top->next->value = temp;
 	write(1, "sa\n", 3);
+	bench_add(stack_a->bench, OP_SA);
 }
 
 void	sb(t_stack *stack_b)
@@ -38,6 +39,7 @@ void	sb(t_stack *stack_b)
 	top->value = top->next->value;
 	top->next->value = temp;
 	write(1, "sb\n", 3);
+	bench_add(stack_b->bench, OP_SB);
 }
 
 void	ss(t_stack *stack_a, t_stack *stack_b)
@@ -61,5 +63,8 @@ void	ss(t_stack *stack_a, t_stack *stack_b)
 		swapped = 1;
 	}
 	if (swapped)
+	{
 		write(1, "ss\n", 3);
+		bench_add(stack_a->bench, OP_SS);
+	}
 }
